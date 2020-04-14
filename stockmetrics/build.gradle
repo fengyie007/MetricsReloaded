@@ -1,0 +1,36 @@
+
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version "${gradle_jetbrains_version}"
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives jar
+    archives sourcesJar
+}
+
+intellij {
+//    插件名称
+    version idea_version
+    type 'IU'
+    // 依赖的插件
+    plugins = ['java','JavaScriptLanguage','Groovy','jsp','CSS','Kotlin','Scala']
+    //Disables updating since-build attribute in plugin.xml
+    updateSinceUntilBuild false
+    buildSearchableOptions.enabled = false
+}
+
+dependencies {
+    compile(project(":MetricsReloadedOpenAPI"))
+    compile(project(":utils"))
+
+    testCompile 'junit:junit:4.12'
+}

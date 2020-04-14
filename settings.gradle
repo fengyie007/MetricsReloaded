@@ -1,0 +1,5 @@
+rootProject.name = 'MetricsReloaded'
+include 'MetricsReloaded'
+include 'MetricsReloadedOpenAPI'
+include 'stockmetrics'
+include 'utils'
